@@ -6,7 +6,7 @@ from .forms import RegistroUsuarioForm, PersonaForm
 from .models import Persona
 # Create your views here.
 
-def registro(request):
+def registro(request): # Se implementa el registro para el usuario nuevo en un html
     if request.method == 'POST':
         form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
