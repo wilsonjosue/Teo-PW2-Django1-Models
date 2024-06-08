@@ -8,8 +8,31 @@ from .models import Persona
 # Create your views here.
 
 def registro(request): # Se implementa el registro para el usuario nuevo en un html
-
-    
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        email = request.POST['email']
+        
+        if password1 == password2:
+            if User.objects.filter(username=username).exists():
+                messages.info(request, 'El nombre de usuario ya está tomado')
+                return redirect('register')
+            elif User.objects.filter(email=email).exists():
+                messages.info(request, 'El correo electrónico ya está registrado')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
+                user.save()
+                messages.info(request, 'Usuario creado exitosamente')
+                return redirect('login')
+        else:
+            messages.info(request, 'Las contraseñas no coinciden')
+            return redirect('register')
+    else:
+        return render(request, 'register.html')
 
 def login_view(request): # Se implementa la funcion login
     if request.method == 'POST':
