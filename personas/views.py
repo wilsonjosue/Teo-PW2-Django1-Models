@@ -28,3 +28,6 @@ def login_view(request): # Se implementa la funcion login
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+def index(request): # Se implementa el index donde se presentara la pantalla principal
+    personas = Persona.objects.all()
+    return render(request, 'index.html', {'personas': personas})
