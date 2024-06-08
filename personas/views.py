@@ -31,3 +31,13 @@ def login_view(request): # Se implementa la funcion login
 def index(request): # Se implementa el index donde se presentara la pantalla principal
     personas = Persona.objects.all()
     return render(request, 'index.html', {'personas': personas})
+
+def agregar_persona(request):# Se implementa la funcion de agregar a una persona
+    if request.method == 'POST':
+        form = PersonaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = PersonaForm()
+    return render(request, 'agregar_persona.html', {'form': form})
