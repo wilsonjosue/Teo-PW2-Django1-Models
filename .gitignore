@@ -13,7 +13,7 @@ db.sqlite3
 
 media/
 # Ignorar directorios de entornos virtuales
-lab08/
+destino/
 ENV/
 venv/
 ENV.bak/
