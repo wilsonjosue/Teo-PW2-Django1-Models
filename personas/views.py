@@ -63,3 +63,7 @@ def agregar_persona(request):# Se implementa la funcion de agregar a una persona
     else:
         form = PersonaForm()
     return render(request, 'agregar_persona.html', {'form': form})
+
+def logout_view(request):
+    auth.logout(request)
+    return redirect('/')
