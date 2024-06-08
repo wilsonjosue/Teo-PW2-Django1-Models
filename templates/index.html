@@ -5,11 +5,21 @@
 </head>
 <body>
     <h2>Lista de Contactos</h2>
+    <header>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            <a href="{% url 'agregar_persona' %}">Agregar Persona</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Registrar</a>
+        {% endif %}
+    </header>
+    <h2>Lista de Contactos</h2>
     <ul>
         {% for persona in personas %}
             <li>{{ persona.nombre }} {{ persona.apellido }} - Edad: {{ persona.edad }}</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'agregar_persona' %}">Agregar Persona</a>
+    
 </body>
 </html>
