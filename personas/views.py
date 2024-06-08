@@ -1,32 +1,31 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from .forms import RegistroUsuarioForm, PersonaForm
 from .models import Persona
 # Create your views here.
 
 def registro(request): # Se implementa el registro para el usuario nuevo en un html
-    if request.method == 'POST':
-        form = RegistroUsuarioForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-    else:
-        form = RegistroUsuarioForm()
-    return render(request, 'register.html', {'form': form})
+
+    
 
 def login_view(request): # Se implementa la funcion login
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('index')
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+        
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Credenciales inválidas')
+            return redirect('login')
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html')  
 
 def index(request): # Se implementa el index donde se presentara la pantalla principal
     personas = Persona.objects.all()
