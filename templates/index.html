@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Contactos</title>
+</head>
+<body>
+    <h2>Lista de Contactos</h2>
+    <ul>
+        {% for persona in personas %}
+            <li>{{ persona.nombre }} {{ persona.apellido }} - Edad: {{ persona.edad }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'agregar_persona' %}">Agregar Persona</a>
+</body>
+</html>
