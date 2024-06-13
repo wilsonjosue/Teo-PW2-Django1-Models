@@ -23,7 +23,8 @@ def registro(request): # Se implementa el registro para el usuario nuevo en un h
                 messages.info(request, 'El correo electrónico ya está registrado')
                 return redirect('register')
             else:
-                user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
+                user = User.objects.create_user(username=username, password=password1, email=email, 
+                                                first_name=first_name, last_name=last_name)
                 user.save()
                 messages.info(request, 'Usuario creado exitosamente')
                 return redirect('login')
