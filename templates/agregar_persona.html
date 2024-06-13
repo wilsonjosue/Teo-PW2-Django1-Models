@@ -5,8 +5,9 @@
 </head>
 <body>
     <h2>Agregar Persona</h2>
-    <form method="post">
-        {% csrf_token %}
+    <!-- accede al formulario-->
+    <form method="post"> 
+        {% csrf_token %} 
         {{ form.as_p }}
         <button type="submit">Agregar</button>
     </form>
