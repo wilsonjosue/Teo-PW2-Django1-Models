@@ -50,11 +50,11 @@ def login_view(request): # Se implementa la funcion login
     else:
         return render(request, 'login.html')  
 
-def index(request): # Se implementa el index donde se presentara la pantalla principal
+def index(request): # Se implementa el index donde se presentara la pantalla de inicio
     personas = Persona.objects.all()
     return render(request, 'index.html', {'personas': personas})
 
-def agregar_persona(request):# Se implementa la funcion de agregar a una persona
+def agregar_persona(request):# Se implementa la funcion de agregar a una persona nueva
     if request.method == 'POST':
         form = PersonaForm(request.POST)
         if form.is_valid():
@@ -64,6 +64,6 @@ def agregar_persona(request):# Se implementa la funcion de agregar a una persona
         form = PersonaForm()
     return render(request, 'agregar_persona.html', {'form': form})
 
-def logout_view(request):
+def logout_view(request): # se crea la funcion para cerrar sesion
     auth.logout(request)
     return redirect('/')
