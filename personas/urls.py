@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [ # Urls para redireccionar 
+urlpatterns = [ # Urls para redireccionar las vistas 
     path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),#Ruta para el login
     path('register/', views.registro, name='register'),#Ruta para registrar
